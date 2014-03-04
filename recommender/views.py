@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def index(request):
-    return HttpResponse("Future site of the world famous GPR Recommender!")
+    return render(request, 'recommender/index.html')
