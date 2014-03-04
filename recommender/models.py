@@ -12,7 +12,7 @@ class Article(models.Model):
         ('domestic political issues','Domestic Political Issues'),
         ('international political issues','International Political Issues'),
         ('georgia','Georgia/UGA'),
-        ('totally international','Totes Interational'),
+        ('totally international','Totes International'),
 
     )
     category=models.CharField(max_length=200,choices=CATEGORY_CHOICES) #Article category choices
