@@ -11,7 +11,7 @@
 
 <div class = "container">
     <h1>Submit an article</h1>
-<form id="submit_form" method="post" action="/submit/">
+<form id="submit_form" method="post" action="">
     {% csrf_token %}
     {% for hidden in form.hidden_fields %}
          {{ hidden }}
@@ -26,12 +26,18 @@
     <input type="submit" class="btn btn-default" name="submit" value="Get recommended articles"/>
 </form>
     <br>
+    {% if articles %}
+        Recommended Articles for {{form_title}}:
+        {% for article in articles %}
+            <li><a href="{{article.url}}">{{article.title}}</a></li>
+        {% endfor %}
+    {% endif %}
+<br>
+<br>
+<br>
     <p><small>Source code available on <a href="http://github.com/gnarizzy/articlerecommender">GitHub</a>.</small></p>
 </div>
 
-<br>
- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
- <script src="{% static 'js/bootstrap.min.js' %}"></script>
- <script src="{% static 'js/bootstrap.js' %}"></script>
+
 </body>
 </html>
