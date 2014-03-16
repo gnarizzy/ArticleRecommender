@@ -18,7 +18,10 @@ def index(request):
             recommended_list = Article.objects.filter(category=cat).order_by('-pub_date')[:3]
             form = ArticleForm()
             context = {'articles':recommended_list,'form':form,'form_title':form_title}
-        return render(request, 'recommender/index.html',context)
+            return render(request, 'recommender/index.html',context)
+        else:
+            form = ArticleForm()
+            return render(request, 'recommender/index.html',{'form':form,})
 
     else:
         form = ArticleForm()
