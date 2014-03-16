@@ -20,7 +20,6 @@ def index(request):
             context = {'articles':recommended_list,'form':form,'form_title':form_title}
             return render(request, 'recommender/index.html',context)
         else:
-            form = ArticleForm()
             return render(request, 'recommender/index.html',{'form':form,})
 
     else:
