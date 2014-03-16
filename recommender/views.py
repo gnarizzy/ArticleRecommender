@@ -10,6 +10,7 @@ for article in article_list:
     c1.train(article.content,article.category)  # Should eventually be moved to database
 
 def index(request):
+    most_recent = Article.objects.order_by('-pub_date')[1].pub_date
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid(): #Add form validation
@@ -17,11 +18,11 @@ def index(request):
             cat = c1.classify(form.cleaned_data['content'])
             recommended_list = Article.objects.filter(category=cat).order_by('-pub_date')[:3]
             form = ArticleForm()
-            context = {'articles':recommended_list,'form':form,'form_title':form_title}
+            context = {'articles':recommended_list,'form':form,'form_title':form_title,'most_recent':most_recent}
             return render(request, 'recommender/index.html',context)
         else:
-            return render(request, 'recommender/index.html',{'form':form,})
+            return render(request, 'recommender/index.html',{'form':form,'most_recent':most_recent})
 
     else:
         form = ArticleForm()
-        return render(request, 'recommender/index.html',{'form':form,})
+        return render(request, 'recommender/index.html',{'form':form,'most_recent':most_recent})
