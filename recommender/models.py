@@ -18,5 +18,5 @@ class Article(models.Model):
     category=models.CharField(max_length=200,choices=CATEGORY_CHOICES) #Article category choices
     url=models.URLField()
     content=models.TextField()
-    def __unicode__(self):  # Python 3: def __str__(self):
+    def __unicode__(self): # Python 3: def __str__(self):
         return self.title

@@ -7,9 +7,12 @@ class classifier:
     def __init__(self, file_name=None):
         self.feature_count={} #feature-category counts
         self.category_count={} #number of documents in each category
-        #self.get_features=get_words #function used to get features, in this case get_words
 
-    #increments feature-category count
+    #returns total number of features in classifier
+    def num_features(self):
+        return len(self.feature_count)
+
+    #increments feature-category count, i.e. {'Putin': {'International':5, 'Domestic':3},'UN':...}
     def inc_feature_count(self, feature, category):
         self.feature_count.setdefault(feature,{})
         self.feature_count[feature].setdefault(category,0)
@@ -17,7 +20,7 @@ class classifier:
 
     #returns a dictionary of unique words in text
     def get_words(self,text):
-        splitter=re.compile('\\W*') #non alphabet characters
+        splitter=re.compile('\\W*') #split on non alphabet characters
         words = [word.lower() for word in splitter.split(text)]
         return dict([(word,1) for word in words])
 
@@ -94,4 +97,6 @@ class naive_bayes(classifier):
         return best
 
 
+#len(self.feature_count) for number of features
 
+    #def accuracy(self, size):
